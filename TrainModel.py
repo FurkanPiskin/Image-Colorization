@@ -14,11 +14,12 @@ from PatchDiscriminator import PatchDiscriminator
 warnings.filterwarnings('ignore')
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(device)
 
-dataset_path = "./Galaxies/images_training_rev1/*jpeg"
+dataset_path = "./Train_Images/images_training_rev1/*jpg"
 paths = glob.glob(dataset_path)
 
-TOTAL_SAMPLES = 2000
+TOTAL_SAMPLES = 8720
 TRAIN_SAMPLES_PERCENTAGE = 0.9
 N_TRAINING_SAMPLES = int(TOTAL_SAMPLES * TRAIN_SAMPLES_PERCENTAGE)
 
@@ -84,7 +85,7 @@ if __name__ == '__main__':
     val_dl = make_dataloaders(paths=val_paths, crop_size=SIZE)
 
     model = MainModel()
-    loss_meter_dict_output = train_model(model, train_dl, val_dl, epochs=20, save_every=1)
+    loss_meter_dict_output = train_model(model, train_dl, val_dl, epochs=30, save_every=1)
 
     """
     Loss_D_real:D'nin gerçek veriyi tanıma başarısı
